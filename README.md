@@ -339,7 +339,7 @@ image_url: $cover/self::img/@src
 
 Additionally, if your site has a telegram channel, you can specify it by setting the following in your site config:
 
-````toml
+```toml
 [params.seo]
   telegram_channel = "channelname" # omit the `@`
 ```
