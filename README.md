@@ -142,19 +142,68 @@ Head to [Hack Cabin](https://hackcabin.com) for a **production example** of whic
 
 ## Getting Started
 
-First [Install Hugo](https://gohugo.io/#action) and, optionally, [elinks](http://elinks.or.cz/) on your machine. Instructions for installing both using [Homebrew](https://brew.sh/) on macOS:
+First [Install Hugo](https://gohugo.io/#action) and git on your machine.
+(Of course, GO should already be installed on the machine.)
+(For Debian, I have used snap to install Hugo instead. Will have to add the /snap/bin path to $PATH in order to run Hugo commands smoothly for the rest of this section.)
+
+Create a new hugo site.
 
 ```shell
-brew install hugo elinks
+hugo new site flying-toasters
 ```
 
-Then run the install script located in `bin/install.sh`, or just paste this into a terminal and press <kbd>Enter</kbd>:
+Clone After Dark theme from github into the themes folder.
 
 ```shell
-curl -s https://raw.githubusercontent.com/comfusion/after-dark/master/bin/install.sh | sh
+cd themes; 
+git clone https://github.com/comfusion/after-dark
 ```
 
-Installation should complete in a matter of seconds.
+Copy custom archetypes from the theme resources to the site.
+
+```shell
+cp themes/after-dark/archetypes/* archetypes
+```
+
+Create settings in the site's `config.toml`:
+
+```toml
+baseurl = "http://example.com" # Controls base URL
+languageCode = "en-US" # Controls html lang attribute
+title = "Site Title" # Homepage title and page title suffix
+paginate = 5 # Number of posts to show before paginating
+
+# theme = "after-dark" # Uncomment to use as default theme
+
+enableRobotsTXT = true # Suggested, enable robots.txt file
+googleAnalytics = "" # Optional, add tracking Id for analytics
+disqusShortname = "" # Optional, add Disqus shortname for comments
+SectionPagesMenu = "main" # Enable menu system for lazy bloggers
+footnoteReturnLinkContents = "↩" # Provides a nicer footnote return link
+
+[params]
+  description = "" # Suggested, controls default description meta
+  author = "" # Optional, controls author name display on posts
+  hide_author = false # Optional, set true to hide author name on posts
+  show_menu = false # Optional, set true to enable section menu
+  powered_by = true # Optional, set false to disable credits
+  images = [] # Suggested, controls default OpenGraph images
+  theme_variant = "" # Optional, for use to overriding default theme
+```
+
+Create a new post draft to test the site content creation.
+
+```shell
+hugo new post/helloworld.md
+```
+
+Use any editor to modify the markdown post file. It should be pre-populated with details based on the archetypes.
+
+Finally, run the local hugo server and publish drafts to preview the site.
+
+```shell
+hugo server -D
+```
 
 ## Customizing
 
